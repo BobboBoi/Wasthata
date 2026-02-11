@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://bhmr6bm2n46u1"]
+
+[ext_resource type="Shader" uid="uid://b0oen8yybuexr" path="res://scripts/chroma_key.gdshader" id="1_8j28r"]
+[ext_resource type="Script" uid="uid://brt0it4drtpth" path="res://scripts/spoop.gd" id="2_ao1jq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ao1jq"]
+shader = ExtResource("1_8j28r")
+
+[sub_resource type="VideoStreamTheora" id="VideoStreamTheora_3n4cw"]
+file = "uid://dhe707bnmix23"
+
+[node name="Window" type="Window" unique_id=1330608839]
+handle_input_locally = false
+gui_disable_input = true
+oversampling_override = 1.0
+mode = 2
+title = "DID YOU SEE THAT"
+initial_position = 1
+visible = false
+mouse_passthrough = true
+script = ExtResource("2_ao1jq")
+
+[node name="Scare" type="Control" parent="." unique_id=663773799]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Video" type="VideoStreamPlayer" parent="Scare" unique_id=327580703]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_ao1jq")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stream = SubResource("VideoStreamTheora_3n4cw")
+autoplay = true
+expand = true
+metadata/_edit_use_anchors_ = true
+
+[connection signal="finished" from="Scare/Video" to="." method="kill"]
